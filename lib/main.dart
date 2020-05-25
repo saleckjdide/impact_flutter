@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Text _lblCkbFraisMTRL =
       Text("Transport à Montréal (200 \$)", style: TextStyle(fontSize: 16));
   Text _lblCkbFraisNkct =
-      Text('Transport à Nouakchott (1300 \$)', style: TextStyle(fontSize: 16));
+      Text("Frais d'exportation (1300 \$)", style: TextStyle(fontSize: 16));
   Text _lblCkbFraisDouanes =
       Text('Frais de douanes (2600 \$)', style: TextStyle(fontSize: 16));
   Text _lblFraisImpact = Text("Frais d'impact :",
