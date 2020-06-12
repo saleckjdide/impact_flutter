@@ -182,7 +182,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         labelStyle: labelStyle,
                         errorText: _validate == false ? _msgValidation : null,
                       ),
-                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: [
                         // ThousandsFormatter(allowFraction: true)
                       ],
