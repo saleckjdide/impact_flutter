@@ -8,7 +8,7 @@ import 'models/ville_model.dart';
 
 List<Ville> _villes;
 List<RowGrille> _rowsGrille;
-String _version = 'Version 1.7.0';
+String _version = 'Version 1.8.6';
 const double _TPS_QC = 1.14975;
 const double _TVQ_QC = 1.05;
 const double _TPS_ON = 1.13;
