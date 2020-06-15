@@ -3,6 +3,7 @@ import 'package:CalculatriceImpact/services/grille_service.dart';
 import 'package:CalculatriceImpact/services/villes_services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 import 'models/ville_model.dart';
 
@@ -25,6 +26,7 @@ const double _MONTANT_MIN = 30000;
 
 void main() {
   runApp(MyHomePage());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
   PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
     if (kReleaseMode) {
       _version = 'Version ' + packageInfo.version;
