@@ -114,81 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: <Widget>[
                 /// Ville
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 25.0, left: 8.0, right: 8.0),
-                  child: FormField<String>(
-                    builder: (FormFieldState<String> state) {
-                      return InputDecorator(
-                          decoration: InputDecoration(
-                            labelText: "Ville",
-                            contentPadding: _contentPadding,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            labelStyle: labelStyle,
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: FutureBuilder<List<Ville>>(
-                                future: loadVilles(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return Text("Erreur");
-                                    }
-                                    return new ButtonTheme(
-                                        alignedDropdown: true,
-                                        height: 5,
-                                        child: DropdownButton<String>(
-                                            isExpanded: true,
-                                            value: _currentSelectedValue,
-                                            isDense: true,
-                                            onChanged: (newValue) {
-                                              setState(() {
-                                                _currentSelectedValue =
-                                                    newValue;
-                                                _fraisMTL =
-                                                    getFraisMontreal(newValue);
-                                                setFraisMTL();
-                                                calculerPrix();
-                                              });
-                                            },
-                                            items: snapshot.data.map((fc) {
-                                              return DropdownMenuItem<String>(
-                                                child: Text(fc.name),
-                                                value: fc.name,
-                                              );
-                                            }).toList()));
-                                  } else
-                                    return CircularProgressIndicator();
-                                }),
-                          ));
-                    },
-                  ),
-                ),
+                _paddingVille(),
 
                 ///Prix
-                Padding(
-                    padding:
-                        const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                    child: TextFormField(
-                      controller: prixController,
-                      onChanged: (text) {
-                        calculerPrix();
-                      },
-                      decoration: InputDecoration(
-                        contentPadding: _contentPadding,
-                        border: OutlineInputBorder(),
-                        labelText: "Prix",
-                        labelStyle: labelStyle,
-                        errorText: _validate == false ? _msgValidation : null,
-                      ),
-                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-                      inputFormatters: [
-                        // ThousandsFormatter(allowFraction: true)
-                      ],
-                    )),
+                _paddingPrix(),
 
                 ///Monaie
                 Padding(
@@ -530,5 +459,82 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return _value;
+  }
+  _paddingPrix(){
+    return Padding(
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                    child: TextFormField(
+                      controller: prixController,
+                      onChanged: (text) {
+                        calculerPrix();
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: _contentPadding,
+                        border: OutlineInputBorder(),
+                        labelText: "Prix",
+                        labelStyle: labelStyle,
+                        errorText: _validate == false ? _msgValidation : null,
+                      ),
+                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                      inputFormatters: [
+                        // ThousandsFormatter(allowFraction: true)
+                      ],
+                    ));
+  }
+  _paddingVille(){
+    return         Padding(
+                  padding:
+                      const EdgeInsets.only(top: 25.0, left: 8.0, right: 8.0),
+                  child: FormField<String>(
+                    builder: (FormFieldState<String> state) {
+                      return InputDecorator(
+                          decoration: InputDecoration(
+                            labelText: "Ville",
+                            contentPadding: _contentPadding,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            labelStyle: labelStyle,
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: FutureBuilder<List<Ville>>(
+                                future: loadVilles(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return Text("Erreur");
+                                    }
+                                    return new ButtonTheme(
+                                        alignedDropdown: true,
+                                        height: 5,
+                                        child: DropdownButton<String>(
+                                            isExpanded: true,
+                                            value: _currentSelectedValue,
+                                            isDense: true,
+                                            onChanged: (newValue) {
+                                              setState(() {
+                                                _currentSelectedValue =
+                                                    newValue;
+                                                _fraisMTL =
+                                                    getFraisMontreal(newValue);
+                                                setFraisMTL();
+                                                calculerPrix();
+                                              });
+                                            },
+                                            items: snapshot.data.map((fc) {
+                                              return DropdownMenuItem<String>(
+                                                child: Text(fc.name),
+                                                value: fc.name,
+                                              );
+                                            }).toList()));
+                                  } else
+                                    return CircularProgressIndicator();
+                                }),
+                          ));
+                    },
+                  ),
+                );
   }
 }
